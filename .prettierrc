@@ -1,0 +1,48 @@
+{
+    "$schema": "http://json.schemastore.org/prettierrc",
+    "singleQuote": true,
+    "semi": false,
+    "tabWidth": 4,
+    "useTabs": false,
+    "overrides": [
+        {
+            "files": "**/*.md",
+            "options": {
+                "parser": "markdown",
+                "proseWrap": "always"
+            }
+        },
+        {
+            "files": "**/*.html",
+            "options": {
+                "parser": "angular",
+                "singleQuote": false,
+                "tabWidth": 2
+            }
+        },
+        {
+            "files": "**/*.css",
+            "options": {
+                "parser": "css",
+                "singleQuote": false,
+                "tabWidth": 2
+            }
+        },
+        {
+            "files": "**/*.scss",
+            "options": {
+                "parser": "scss",
+                "singleQuote": true,
+                "tabWidth": 4
+            }
+        },
+        {
+            "files": "**/*.json",
+            "options": {
+                "parser": "json",
+                "singleQuote": false,
+                "tabWidth": 2
+            }
+        }
+    ]
+}

@@ -1,0 +1,6 @@
+.idea
+coverage
+e2e
+node_modules
+.next
+public
