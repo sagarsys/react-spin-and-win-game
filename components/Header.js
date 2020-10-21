@@ -1,6 +1,6 @@
-import styles from '../styles/Header.module.scss'
+import styles from '../styles/components/Header.module.scss'
 
-export function Header() {
+export default function Header() {
     return (
         <header>
             <div className={styles.logo}>

@@ -1,6 +1,5 @@
-import { Container } from 'react-bootstrap'
-import { Header } from './Header'
-import { Wheel } from './Wheel'
+import Container from 'react-bootstrap/Container'
+import Header from './Header'
 
 export default function Layout({ children }) {
     return (
