@@ -1,13 +1,19 @@
-export function Wheel() {
+import Col from 'react-bootstrap/Col'
+import styles from '../styles/components/Wheel.module.scss'
+
+export default function Wheel() {
     return (
-        <div className="wheel-container">
-            <div className="wheel-peg" />
-            <div className="wheel-wrapper">
+        <Col md={7} className={styles.wheelContainer}>
+            <div className={styles.wheelPeg} />
+            <div className={styles.wheelWrapper}>
                 <img src="/images/wheel.svg" alt="Wheel" />
-                <div className="wheel-text">
-                    <h1>Spin & Win</h1>
+                <div className={styles.wheelText}>
+                    <h1 className={styles.test}>
+                        Spin <br />
+                        <span className="text-warning">&</span> Win
+                    </h1>
                 </div>
             </div>
-        </div>
+        </Col>
     )
 }

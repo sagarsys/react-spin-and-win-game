@@ -1,0 +1,50 @@
+$whitish: #eee;
+
+.wheelContainer {
+    position: relative;
+}
+
+.wheelWrapper {
+}
+
+.wheelText {
+    font-family: 'Vampiro One', cursive;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate3d(-50%, -50%, 0);
+
+    h1 {
+        font-size: 4em;
+        color: $whitish;
+        @media screen and (max-width: 1200px) {
+            font-size: 2em;
+        }
+    }
+}
+
+.wheelPeg {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translate3d(-50%, -40px, 0);
+    border-style: solid;
+    border-color: transparent transparent $whitish transparent;
+    border-width: 0 25px 25px 25px;
+    height: 0;
+    width: 50px;
+    box-sizing: content-box;
+    margin: 20px 0 50px 0;
+
+    &:after {
+        content: '';
+        position: absolute;
+        top: 25px;
+        left: -25px;
+        width: 0;
+        height: 0;
+        border-style: solid;
+        border-color: $whitish transparent transparent transparent;
+        border-width: 70px 50px 0 50px;
+    }
+}
