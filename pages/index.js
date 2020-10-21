@@ -1,10 +1,11 @@
 import Head from 'next/head'
 import Jumbotron from 'react-bootstrap/Jumbotron'
 import Button from 'react-bootstrap/Button'
+import Layout from '../components/Layout'
 
 export default function Home() {
     return (
-        <div>
+        <Layout>
             <Head>
                 <title>Spin and Win game</title>
                 <link rel="icon" href="/favicon.ico" />
@@ -16,6 +17,6 @@ export default function Home() {
             </Jumbotron>
 
             <Button>test</Button>
-        </div>
+        </Layout>
     )
 }
