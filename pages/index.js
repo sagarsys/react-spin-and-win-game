@@ -1,19 +1,21 @@
 import Head from 'next/head'
-import Jumbotron from 'react-bootstrap/Jumbotron'
 import Layout from '../components/Layout'
-import { Wheel } from '../components/Wheel'
-import BettingForm from '../components/BettingForm'
+import Game from '../components/Game'
 
 export default function Home() {
     return (
         <Layout>
             <Head>
                 <title>Spin and Win game</title>
-                <link rel="icon" href="/favicon.ico" />
+                <meta
+                    name="viewport"
+                    content="width=device-width, initial-scale=1"
+                />
+                <meta name="description" content="Spin and win game" />
+                <link rel="icon" type="image/x-icon" href="/favicon.ico" />
             </Head>
 
-            <Wheel />
-            <BettingForm />
+            <Game />
         </Layout>
     )
 }
