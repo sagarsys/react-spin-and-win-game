@@ -5,6 +5,7 @@ import Form from 'react-bootstrap/Form'
 import styles from '../styles/components/BettingForm.module.scss'
 import CustomRadio from './CustomRadio'
 import Button from 'react-bootstrap/Button'
+import TermsAndConditions from './TermsAndConditions'
 
 export default function BettingForm() {
     return (
@@ -28,30 +29,37 @@ export default function BettingForm() {
                             </h2>
                             <hr />
                         </Col>
-                        <Col xs={12}>
+                        <Col xs={6}>
                             <Form.Group controlId="stake">
-                                <Form.Label>Balance</Form.Label>
+                                <Form.Label className={styles.formLabel}>
+                                    Balance
+                                </Form.Label>
                                 <Form.Control
                                     type="text"
                                     placeholder="1000"
                                     value={1000}
                                     readOnly
+                                    disabled
                                 />
                             </Form.Group>
-                        </Col>
-                        <Col>
                             <Form.Group controlId="stake">
-                                <Form.Label>Stake</Form.Label>
+                                <Form.Label className={styles.formLabel}>
+                                    Stake
+                                </Form.Label>
                                 <Form.Control
                                     type="text"
                                     placeholder="Enter stake"
+                                    value={25}
                                 />
                                 <Form.Text className="text-muted">
-                                    Stake should be between 25 and 500.
+                                    Min 25 | Max 500.
                                 </Form.Text>
                             </Form.Group>
                         </Col>
-                        <Col>Possible Win</Col>
+                        <Col xs={6} className={styles.possibleWin}>
+                            <p className="text-uppercase">Possible Win</p>
+                            <p className="text-success">100</p>
+                        </Col>
                     </Row>
 
                     <Row className="pb-2">
@@ -60,18 +68,18 @@ export default function BettingForm() {
                             <hr />
                         </Col>
                         <Col xs={12} className="px-5 pt-2">
-                            <Button variant="warning" size="lg" block>
+                            <Button
+                                type="submit"
+                                variant="warning"
+                                size="lg"
+                                block
+                            >
                                 Click to spin
                             </Button>
                         </Col>
                     </Row>
-                    <Row>
-                        <Col xs={12} className="text-center">
-                            <hr />
-                            Terms & Conditions
-                        </Col>
-                    </Row>
                 </Form>
+                <TermsAndConditions />
             </Jumbotron>
         </Col>
     )
