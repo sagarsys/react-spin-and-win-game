@@ -1,4 +1,4 @@
-$whitish: #eee;
+@import '../base';
 
 .wheelContainer {
     position: relative;
@@ -8,7 +8,7 @@ $whitish: #eee;
 }
 
 .wheelText {
-    font-family: 'Vampiro One', cursive;
+    font-family: $secondaryFont;
     position: absolute;
     top: 50%;
     left: 50%;
