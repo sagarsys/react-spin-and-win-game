@@ -1,0 +1,73 @@
+@import '../base';
+
+.customRadios {
+    display: flex;
+    justify-content: center;
+
+    div {
+        display: inline-block;
+    }
+
+    input[type='radio'] {
+        display: none;
+
+        + label {
+            color: #eee;
+            font-family: Arial, sans-serif;
+            font-size: 1.5em;
+            padding: 0.5rem;
+
+            span {
+                position: relative;
+                display: inline-flex;
+                justify-content: center;
+                align-items: center;
+                width: 100px;
+                height: 100px;
+                margin: -1px 4px 0 0;
+                vertical-align: middle;
+                cursor: pointer;
+                border-radius: 50%;
+                border: 2px solid #ffffff;
+                box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.33);
+                background-repeat: no-repeat;
+                background-position: center;
+                text-align: center;
+                line-height: 44px;
+
+                strong {
+                    z-index: 1;
+                }
+
+                img {
+                    position: absolute;
+                    top: 50%;
+                    left: 50%;
+                    transform: translate3d(-50%, -50%, 0);
+                    opacity: 0;
+                    transition: all 0.3s ease;
+                }
+            }
+        }
+
+        &.color1 + label span {
+            background-color: $color-1;
+        }
+
+        &.color2 + label span {
+            background-color: $color-2;
+        }
+
+        &.color3 + label span {
+            background-color: $color-3;
+        }
+
+        &.color4 + label span {
+            background-color: $color-4;
+        }
+
+        &:checked + label span img {
+            opacity: 1;
+        }
+    }
+}
