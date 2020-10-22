@@ -8,12 +8,19 @@
 }
 
 .formLabel {
+    font-family: $secondaryFont;
+    font-size: 1.2rem;
     text-transform: uppercase;
+}
+
+.stake {
+    display: flex;
+    align-items: center;
 }
 
 .possibleWin {
     font-family: $secondaryFont;
-    font-size: 1.5rem;
+    font-size: 1.2rem;
     text-align: center;
-    padding: 2rem;
+    padding: 1rem;
 }

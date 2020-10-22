@@ -29,19 +29,7 @@ export default function BettingForm() {
                             </h2>
                             <hr />
                         </Col>
-                        <Col xs={6}>
-                            <Form.Group controlId="stake">
-                                <Form.Label className={styles.formLabel}>
-                                    Balance
-                                </Form.Label>
-                                <Form.Control
-                                    type="text"
-                                    placeholder="1000"
-                                    value={1000}
-                                    readOnly
-                                    disabled
-                                />
-                            </Form.Group>
+                        <Col xs={6} className={styles.stake}>
                             <Form.Group controlId="stake">
                                 <Form.Label className={styles.formLabel}>
                                     Stake
@@ -50,6 +38,7 @@ export default function BettingForm() {
                                     type="text"
                                     placeholder="Enter stake"
                                     value={25}
+                                    size="lg"
                                 />
                                 <Form.Text className="text-muted">
                                     Min 25 | Max 500.
@@ -57,8 +46,10 @@ export default function BettingForm() {
                             </Form.Group>
                         </Col>
                         <Col xs={6} className={styles.possibleWin}>
-                            <p className="text-uppercase">Possible Win</p>
+                            <p className="text-uppercase mb-0">Possible Win</p>
                             <p className="text-success">100</p>
+                            <p className="text-uppercase mb-0">Balance</p>
+                            <p className="text-success">1000</p>
                         </Col>
                     </Row>
 
