@@ -1,12 +1,11 @@
 @import 'theme.scss';
-@import url('https://fonts.googleapis.com/css2?family=Vampiro+One&display=swap');
+@import 'base';
 
 html,
 body {
     padding: 0;
     margin: 0;
-    font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-        Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+    font-family: $primaryFont;
 }
 
 body {
