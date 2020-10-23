@@ -1,18 +1,19 @@
 import styles from '../styles/components/CustomRadio.module.scss'
 
-export default function CustomRadio() {
+export default function CustomRadio({ onChange }) {
     return (
         <div className={styles.customRadios}>
             <div>
                 <input
                     type="radio"
-                    id="color-1"
+                    name="odds"
+                    id="x2"
+                    value="x2"
                     className={styles.color1}
-                    name="color"
-                    value="color-1"
-                    checked
+                    onChange={onChange}
+                    defaultChecked
                 />
-                <label htmlFor="color-1">
+                <label htmlFor="x2">
                     <span>
                         <strong>X2</strong>
                         <img src="/images/chip.png" alt="Checked Icon" />
@@ -23,12 +24,13 @@ export default function CustomRadio() {
             <div>
                 <input
                     type="radio"
-                    id="color-2"
+                    name="odds"
+                    id="x3"
+                    value="x3"
                     className={styles.color2}
-                    name="color"
-                    value="color-2"
+                    onChange={onChange}
                 />
-                <label htmlFor="color-2">
+                <label htmlFor="x3">
                     <span>
                         <strong>X3</strong>
                         <img src="/images/chip.png" alt="Checked Icon" />
@@ -39,12 +41,13 @@ export default function CustomRadio() {
             <div>
                 <input
                     type="radio"
-                    id="color-3"
+                    name="odds"
+                    id="x5"
+                    value="x5"
                     className={styles.color3}
-                    name="color"
-                    value="color-3"
+                    onChange={onChange}
                 />
-                <label htmlFor="color-3">
+                <label htmlFor="x5">
                     <span>
                         <strong>X5</strong>
                         <img src="/images/chip.png" alt="Checked Icon" />
@@ -55,12 +58,13 @@ export default function CustomRadio() {
             <div>
                 <input
                     type="radio"
-                    id="color-4"
+                    name="odds"
+                    id="x10"
+                    value="x10"
                     className={styles.color4}
-                    name="color"
-                    value="color-4"
+                    onChange={onChange}
                 />
-                <label htmlFor="color-4">
+                <label htmlFor="x10">
                     <span>
                         <strong>X10</strong>
                         <img src="/images/chip.png" alt="Checked Icon" />
