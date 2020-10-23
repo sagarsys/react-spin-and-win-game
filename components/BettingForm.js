@@ -102,13 +102,13 @@ export default function BettingForm() {
                                 Click to spin
                             </Button>
                         </Col>
-                        <Col xs={6} className={styles.possibleWin}>
+                        <Col xs={6} className={styles.indicator}>
                             <p className="text-uppercase mb-0">Possible Win</p>
                             <p className="text-success">
                                 {calculatePossibleWin()}
                             </p>
                         </Col>
-                        <Col xs={6} className={styles.possibleWin}>
+                        <Col xs={6} className={styles.indicator}>
                             <p className="text-uppercase mb-0">Balance</p>
                             <p className="text-success">{balance}</p>
                         </Col>
