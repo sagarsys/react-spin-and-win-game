@@ -1,3 +1,5 @@
+import { useState } from 'react'
+import { Controller, useForm } from 'react-hook-form'
 import Jumbotron from 'react-bootstrap/Jumbotron'
 import Col from 'react-bootstrap/Col'
 import Row from 'react-bootstrap/Row'
@@ -6,15 +8,12 @@ import styles from '../styles/components/BettingForm.module.scss'
 import CustomRadio from './CustomRadio'
 import Button from 'react-bootstrap/Button'
 import TermsAndConditions from './TermsAndConditions'
-import { Controller, useForm } from 'react-hook-form'
-import { useState } from 'react'
-import { parseMultiplierFromOddsString } from '../lib/string'
+import { calculatePossibleWin, INITIAL_BALANCE, spin } from '../lib/game'
 
 const defaultValues = {
     odds: 'x2',
-    stake: 25,
+    stake: 10,
 }
-const INITIAL_BALANCE = 1000
 
 export default function BettingForm() {
     const { handleSubmit, control, watch } = useForm({
@@ -26,9 +25,12 @@ export default function BettingForm() {
     const onSubmit = (data) => {
         console.log('submit', data)
         setData(data)
+        const { numOfSegmentsToSpin, balance } = spin(data)
+        setBalance(balance)
+        console.log(numOfSegmentsToSpin)
     }
-    const calculatePossibleWin = () => {
-        return watch('stake') * parseMultiplierFromOddsString(watch('odds'))
+    const displayPossibleWin = () => {
+        return calculatePossibleWin(watch('odds'), watch('stake'))
     }
 
     return (
@@ -70,8 +72,8 @@ export default function BettingForm() {
                                         <Form.Control
                                             type="number"
                                             placeholder="Enter stake"
-                                            min={25}
-                                            max={500}
+                                            min={10}
+                                            max={100}
                                             size="lg"
                                         />
                                     }
@@ -81,7 +83,7 @@ export default function BettingForm() {
                                 />
 
                                 <Form.Text className="text-info">
-                                    Min 25 | Max 500.
+                                    Min 10 | Max 100.
                                 </Form.Text>
                             </Form.Group>
                         </Col>
@@ -105,7 +107,7 @@ export default function BettingForm() {
                         <Col xs={6} className={styles.indicator}>
                             <p className="text-uppercase mb-0">Possible Win</p>
                             <p className="text-success">
-                                {calculatePossibleWin()}
+                                {displayPossibleWin()}
                             </p>
                         </Col>
                         <Col xs={6} className={styles.indicator}>
