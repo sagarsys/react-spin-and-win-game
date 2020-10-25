@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useContext, useState } from 'react'
 import { Controller, useForm } from 'react-hook-form'
 import Jumbotron from 'react-bootstrap/Jumbotron'
 import Col from 'react-bootstrap/Col'
@@ -9,6 +9,7 @@ import CustomRadio from './CustomRadio'
 import Button from 'react-bootstrap/Button'
 import TermsAndConditions from './TermsAndConditions'
 import { calculatePossibleWin, INITIAL_BALANCE, spin } from '../lib/game'
+import { store } from '../store/store'
 
 const defaultValues = {
     odds: 'x2',
@@ -16,6 +17,9 @@ const defaultValues = {
 }
 
 export default function BettingForm() {
+    const { state } = useContext(store)
+    console.warn(state)
+
     const { handleSubmit, control, watch } = useForm({
         defaultValues,
         mode: 'onBlur',
