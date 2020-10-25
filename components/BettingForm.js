@@ -1,4 +1,4 @@
-import { useContext, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import { Controller, useForm } from 'react-hook-form'
 import Jumbotron from 'react-bootstrap/Jumbotron'
 import Col from 'react-bootstrap/Col'
@@ -8,8 +8,10 @@ import styles from '../styles/components/BettingForm.module.scss'
 import CustomRadio from './CustomRadio'
 import Button from 'react-bootstrap/Button'
 import TermsAndConditions from './TermsAndConditions'
-import { calculatePossibleWin, INITIAL_BALANCE, spin } from '../lib/game'
+import { calculatePossibleWin } from '../lib/game'
 import { store } from '../store/store'
+import { SERVER_BASE_URL } from '../config'
+import { fetcher } from '../lib/http'
 
 const defaultValues = {
     odds: 'x2',
@@ -18,20 +20,36 @@ const defaultValues = {
 
 export default function BettingForm() {
     const { state } = useContext(store)
-    console.warn(state)
-
     const { handleSubmit, control, watch } = useForm({
         defaultValues,
         mode: 'onBlur',
     })
-    const [data, setData] = useState(null)
-    const [balance, setBalance] = useState(INITIAL_BALANCE)
+    const [formValues, setFormValues] = useState(null)
+    const [balance, setBalance] = useState(state.balance || 1000)
+
+    useEffect(() => {
+        if (!formValues) return
+        spin(formValues, state._id).then((resp) => {
+            if (!resp) return
+            console.log(resp)
+            const { balance } = resp
+            setBalance(balance)
+        })
+    }, [formValues])
+
+    async function spin(data, _id) {
+        if (!data || !_id) return
+        return await fetcher(
+            `${SERVER_BASE_URL}/api/game?` +
+                new URLSearchParams({
+                    _id: state._id,
+                    ...data,
+                })
+        )
+    }
     const onSubmit = (data) => {
-        console.log('submit', data)
-        setData(data)
-        const { numOfSegmentsToSpin, balance } = spin(data)
-        setBalance(balance)
-        console.log(numOfSegmentsToSpin)
+        console.log('Spin', data)
+        setFormValues(data)
     }
     const displayPossibleWin = () => {
         return calculatePossibleWin(watch('odds'), watch('stake'))
