@@ -4,18 +4,24 @@ import Wheel from './Wheel'
 import BettingForm from './BettingForm'
 import { useContext, useEffect } from 'react'
 import { store } from '../store/store'
-import useSwr from 'swr'
 import { SERVER_BASE_URL } from '../config'
 import { INIT_GAME } from '../store/actions'
-import { fetcher } from '../lib/http'
+import { post } from '../lib/http'
 
 export default function Game() {
-    const { dispatch } = useContext(store)
-    const { data, error } = useSwr(`${SERVER_BASE_URL}/api/hello`, fetcher)
+    const { state, dispatch } = useContext(store)
     useEffect(() => {
-        if (!data) return
-        dispatch({ type: INIT_GAME, payload: data })
-    }, [data])
+        if (state && state.initialized) return
+        post(`${SERVER_BASE_URL}/api/game`).then((res) => {
+            dispatch({
+                type: INIT_GAME,
+                payload: {
+                    ...res,
+                    initialized: true,
+                },
+            })
+        })
+    }, [state])
 
     return (
         <Container fluid>
