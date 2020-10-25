@@ -1,7 +1,9 @@
 import React, { createContext, useReducer } from 'react'
 import { INIT_GAME } from './actions'
 
-const initialState = {}
+const initialState = {
+    initialized: false,
+}
 const store = createContext(initialState)
 const { Provider } = store
 
