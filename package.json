@@ -20,7 +20,7 @@
     "react-dom": "16.14.0",
     "react-hook-form": "^6.9.5",
     "sass": "^1.27.0",
-    "swr": "^0.3.6"
+    "use-react-modal": "0.0.9"
   },
   "devDependencies": {
     "husky": "^4.3.0",
