@@ -7,6 +7,9 @@
 .wheelWrapper {
 }
 
+.wheel {
+}
+
 .wheelText {
     font-family: $secondaryFont;
     position: absolute;
@@ -24,6 +27,7 @@
 }
 
 .wheelPeg {
+    z-index: 9999;
     position: absolute;
     top: 0;
     left: 50%;
