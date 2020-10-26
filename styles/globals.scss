@@ -6,7 +6,7 @@ body {
     padding: 0;
     margin: 0;
     font-family: $primaryFont;
-    overflow: hidden;
+    overflow-x: hidden;
 }
 
 body {
@@ -32,6 +32,10 @@ body {
             hsl(50, 74%, 56%),
             hsl(122, 74%, 56%)
         );
+}
+
+#__next {
+    overflow: hidden;
 }
 
 a {
