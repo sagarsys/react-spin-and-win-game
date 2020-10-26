@@ -38,7 +38,6 @@ export default function BettingForm() {
             console.log('API Resp', resp)
             const {
                 balance,
-                currentSegment,
                 win,
                 lose,
                 draw,
@@ -64,7 +63,7 @@ export default function BettingForm() {
                 })
                 dispatch({
                     type: SYNC_SERVER_RESPONSE,
-                    payload: { balance, currentSegment },
+                    payload: { balance },
                 })
             })
         })
