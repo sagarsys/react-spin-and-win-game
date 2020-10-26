@@ -8,10 +8,15 @@ import styles from '../styles/components/BettingForm.module.scss'
 import CustomRadio from './CustomRadio'
 import Button from 'react-bootstrap/Button'
 import TermsAndConditions from './TermsAndConditions'
-import { calculatePossibleWin } from '../lib/game'
+import { ANIMATION_DURATION, calculatePossibleWin } from '../lib/game'
 import { store } from '../store/store'
 import { SERVER_BASE_URL } from '../config'
 import { fetcher } from '../lib/http'
+import {
+    SET_GAME_STATUS,
+    SET_SPINNING_STATUS,
+    SYNC_SERVER_RESPONSE,
+} from '../store/actions'
 
 const defaultValues = {
     odds: 'x2',
@@ -19,21 +24,48 @@ const defaultValues = {
 }
 
 export default function BettingForm() {
-    const { state } = useContext(store)
+    const { state, dispatch } = useContext(store)
     const { handleSubmit, control, watch } = useForm({
         defaultValues,
         mode: 'onBlur',
     })
     const [formValues, setFormValues] = useState(null)
-    const [balance, setBalance] = useState(state.balance || 1000)
 
     useEffect(() => {
         if (!formValues) return
         spin(formValues, state._id).then((resp) => {
             if (!resp) return
-            console.log(resp)
-            const { balance } = resp
-            setBalance(balance)
+            console.log('API Resp', resp)
+            const {
+                balance,
+                currentSegment,
+                win,
+                draw,
+                bonus,
+                numOfSegmentsToSpin,
+            } = resp
+            dispatch({
+                type: SET_SPINNING_STATUS,
+                payload: {
+                    isSpinning: true,
+                    numOfSegmentsToSpin,
+                },
+            })
+
+            const animation = new Promise((resolve) => {
+                setTimeout(() => resolve(), ANIMATION_DURATION * 1000)
+            })
+            // Wait for wheel animation to finish
+            animation.then(() => {
+                dispatch({
+                    type: SET_GAME_STATUS,
+                    payload: { win, draw, bonus },
+                })
+                dispatch({
+                    type: SYNC_SERVER_RESPONSE,
+                    payload: { balance, currentSegment },
+                })
+            })
         })
     }, [formValues])
 
@@ -47,10 +79,12 @@ export default function BettingForm() {
                 })
         )
     }
+
     const onSubmit = (data) => {
         console.log('Spin', data)
         setFormValues(data)
     }
+
     const displayPossibleWin = () => {
         return calculatePossibleWin(watch('odds'), watch('stake'))
     }
@@ -122,6 +156,7 @@ export default function BettingForm() {
                                 variant="warning"
                                 size="lg"
                                 block
+                                disabled={state.isSpinning}
                             >
                                 Click to spin
                             </Button>
@@ -134,7 +169,7 @@ export default function BettingForm() {
                         </Col>
                         <Col xs={6} className={styles.indicator}>
                             <p className="text-uppercase mb-0">Balance</p>
-                            <p className="text-success">{balance}</p>
+                            <p className="text-success">{state.balance}</p>
                         </Col>
                     </Row>
                 </Form>
