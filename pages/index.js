@@ -2,6 +2,7 @@ import { StateProvider } from '../store/store'
 import Layout from '../components/Layout'
 import Head from 'next/head'
 import Game from '../components/Game'
+import Notifications from '../components/Notifications'
 
 export default function Home() {
     return (
@@ -19,6 +20,7 @@ export default function Home() {
 
                 <Game />
             </Layout>
+            <Notifications />
         </StateProvider>
     )
 }
