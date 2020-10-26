@@ -32,7 +32,7 @@ export default function BettingForm() {
     const [formValues, setFormValues] = useState(null)
 
     useEffect(() => {
-        if (!formValues) return
+        if (!formValues || !state.initialized) return
         spin(formValues, state._id).then((resp) => {
             if (!resp) return
             console.log('API Resp', resp)
@@ -40,6 +40,7 @@ export default function BettingForm() {
                 balance,
                 currentSegment,
                 win,
+                lose,
                 draw,
                 bonus,
                 numOfSegmentsToSpin,
@@ -59,7 +60,7 @@ export default function BettingForm() {
             animation.then(() => {
                 dispatch({
                     type: SET_GAME_STATUS,
-                    payload: { win, draw, bonus },
+                    payload: { win, draw, bonus, lose },
                 })
                 dispatch({
                     type: SYNC_SERVER_RESPONSE,
@@ -156,7 +157,9 @@ export default function BettingForm() {
                                 variant="warning"
                                 size="lg"
                                 block
-                                disabled={state.isSpinning}
+                                disabled={
+                                    state.isSpinning || !state.initialized
+                                }
                             >
                                 Click to spin
                             </Button>
