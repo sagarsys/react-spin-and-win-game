@@ -7,7 +7,6 @@ const handler = nextConnect()
 
 const initialGameSettings = {
     balance: 1000,
-    currentSegment: 1,
 }
 
 const createGame = () => {
@@ -22,19 +21,18 @@ handler.use(middleware)
 handler.get(async (req, res) => {
     const { _id, odds, stake } = req.query
     const game = await req.db.collection('game').findOne(ObjectId(_id))
-    const outcome = nextSpin(odds, stake, game.balance, game.currentSegment)
+    const outcome = nextSpin(odds, stake, game.balance)
     await req.db.collection('game').updateOne(
         { _id: ObjectId(_id) },
         {
             $set: {
                 balance: outcome.balance,
-                currentSegment: outcome.destination,
             },
         }
     )
     console.log('>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>')
-    console.log({ game, outcome })
-    console.log('>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>')
+    console.log('API NEXT SPIN::', { game, outcome })
+    console.log('<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<')
     res.json({
         ...game,
         ...outcome,
