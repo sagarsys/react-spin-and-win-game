@@ -10,7 +10,6 @@ export default function Wheel() {
     const wheel = useRef(null)
     const { state, dispatch } = useContext(store)
     const { numOfSegmentsToSpin } = state
-    const [globalRotation, setGlobalRotation] = useState(0)
 
     useEffect(() => {
         if (numOfSegmentsToSpin > 0) {
@@ -34,9 +33,11 @@ export default function Wheel() {
     const spin = (segmentsToSpin) => {
         if (!wheel.current) return
         const newRotation = (segmentsToSpin - 1) * (360 / NUM_OF_SEGMENTS)
-        const rotation = globalRotation + newRotation
-        setGlobalRotation(rotation)
-        gsap.to(wheel.current, { duration: ANIMATION_DURATION, rotation })
+        // spin win to correct location -> -ve to spin clockwise
+        gsap.to(wheel.current, {
+            duration: ANIMATION_DURATION,
+            rotation: -newRotation,
+        })
     }
 
     return (
