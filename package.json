@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "bootstrap": "^4.5.3",
+    "gsap": "^3.5.1",
     "mongodb": "^3.6.2",
     "next": "9.5.5",
     "next-connect": "^0.9.1",
